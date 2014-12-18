@@ -23,18 +23,18 @@ redcarpet:
       short_name : shockw
 
 navigations:
-  - title: 关于我
-    class: fa fa-list-ul
-    href: /about/
-  - title: 归档
-    class: fa fa-tags
-    href: /archive/
   - title: 目录
     class: fa fa-user
     href: /categories/
   - title: 标签
     class: fa fa-film
     href: /tags/
+  - title: 归档
+    class: fa fa-tags
+    href: /archive/    
   - title: 订阅
     class: fa fa-rss
     href: /atom.xml
+  - title: 关于我
+    class: fa fa-list-ul
+    href: /about/
