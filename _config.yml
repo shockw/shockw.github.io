@@ -1,0 +1,40 @@
+# Site settings
+title: 老王的工作室
+email: wang.zhen@foxmail.com
+description: "为中小企业生产实用、简单的软件"
+permalink: /:year/:month/:day/:title.html
+baseurl: ""
+url: "http://www.shockw.com"
+atom-baseurl: "http://www.shockw.com"
+author: "shockw"
+
+# Build settings
+# permalink: date
+
+highlighter: pygments
+markdown: redcarpet
+redcarpet:
+  extensions: [fenced_code_blocks,no_intra_emphasis,strikethrough,no_intra_emphasis,autolink,tables]
+
+#duoshuo
+  comments :
+    provider : duoshuo
+    duoshuo :
+      short_name : shockw
+
+navigations:
+  - title: About
+    class: fa fa-list-ul
+    href: /about/
+  - title: Archive
+    class: fa fa-tags
+    href: /archive/
+  - title: Categories
+    class: fa fa-user
+    href: /categories/
+  - title: Tags
+    class: fa fa-film
+    href: /tags/
+  - title: Rss
+    class: fa fa-rss
+    href: /atom.xml
