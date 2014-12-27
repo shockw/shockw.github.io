@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "使用jekyll在网上建立一个博客站点"
-category: personal
+category: 个人
 tags: jekyll
 ---
 #### （1）与其他博客不同点
