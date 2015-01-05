@@ -1,4 +1,4 @@
-t---
+---
 layout: post
 title:  "小记工资条查询需求"
 category: 记录
