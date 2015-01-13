@@ -1,7 +1,7 @@
 # Site settings
-title: 老王的工作室
+title: 小兰花天地
 email: wang.zhen@foxmail.com
-description: "为中小企业生产实用、简单的软件"
+description: "为简单实用的企业应用软件叫好"
 permalink: /:year/:month/:day/:title.html
 baseurl: ""
 url: "http://www.shockw.com"
