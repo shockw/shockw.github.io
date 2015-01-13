@@ -1,11 +1,11 @@
 # Site settings
-title: 小兰花天地
+title: 小兰花博客
 email: wang.zhen@foxmail.com
-description: "为简单实用的企业应用软件叫好"
+description: "企业应用软件天地"
 permalink: /:year/:month/:day/:title.html
 baseurl: ""
-url: "http://www.shockw.com"
-atom-baseurl: "http://www.shockw.com"
+url: "http://www.shockw.info"
+atom-baseurl: "http://www.shockw.info"
 author: "shockw"
 
 # Build settings

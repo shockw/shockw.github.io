@@ -22,7 +22,7 @@ layout: default
     <li class="listing-item">
       <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
       <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-	  <hr>
+	  <hr><hr>
 	  <p>
    {{ post.content  | | split:'<!--more-->' | first | strip_html }}
    <a class="more" href="{{ site.url }}{{ post.url }}">[继续阅读]</a>
