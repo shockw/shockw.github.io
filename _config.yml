@@ -1,11 +1,11 @@
 # Site settings
-title: 小兰花博客
-email: wang.zhen@foxmail.com
-description: "企业应用软件天地"
+title: 语诚的博客
+email: wang.zhen@ustcinfo.com
+description: "大数据技术讨论"
 permalink: /:year/:month/:day/:title.html
 baseurl: ""
-url: "http://www.shockw.info"
-atom-baseurl: "http://www.shockw.info"
+url: "http://shockw.github.io"
+atom-baseurl: "http://shockw.github.io"
 author: "shockw"
 
 # Build settings
