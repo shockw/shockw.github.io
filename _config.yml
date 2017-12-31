@@ -1,7 +1,7 @@
 # Site settings
-title: 语诚的博客
-email: wang.zhen@ustcinfo.com
-description: "大数据技术讨论"
+title: 老王的编程之旅
+email: wang.zhen@foxmail.com
+description: "企业应用软件、Java、Web、大数据、移动"
 permalink: /:year/:month/:day/:title.html
 baseurl: ""
 url: "http://shockw.github.io"
@@ -17,10 +17,10 @@ redcarpet:
   extensions: [fenced_code_blocks,no_intra_emphasis,strikethrough,no_intra_emphasis,autolink,tables]
 
 #duoshuo
-  comments :
-    provider : duoshuo
-    duoshuo :
-      short_name : shockw
+#comments :
+# provider : duoshuo
+# duoshuo :
+# short_name : shockw
 
 navigations:
   - title: 目录
