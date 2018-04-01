@@ -1,181 +1,39 @@
 ---
 layout: post
-title:  "如何使用 babel"
-categories: JavaScript
-tags:  ES2015 ES6 ES5 babel 
+title:  "2017年贵阳数博会参展与讯飞人工智能大数据产业论坛参会记录"
+categories: 大数据
+tags:  大数据 人工智能 
 ---
 
 * content
 {:toc}
 
-[Babel](https://babeljs.io/) 用于将 ES6 的代码转化为 ES5，使得 ES6 可以在目前的浏览器环境下使用。学习使用 babel 是为了使用 ES2015 做准备。本文将介绍如何使用 babel，以及一些相关的配置。
-
-
-
-
-![](https://babeljs.io/images/logo.svg)
-
-学习 Babel 可以通过其手册 Babel handbook。
-
-* [babel-handbook](https://github.com/thejameskyle/babel-handbook)
-
-其中包含多语言版本，分为[用户手册](https://github.com/thejameskyle/babel-handbook/blob/master/translations/zh-Hans/user-handbook.md)和[插件手册](https://github.com/thejameskyle/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md)。这是一个很好的学习 Babel 的资料。
-
-## babel-cli
-
-在 node 和 npm 环境安装好的前提下，安装 babel，如下：
-
-```sh
-npm install --global babel-cli
-```
-
-安装完成后就可以编译文件了。
-
-```sh
-babel main.js
-```
-
-编译后的文件显示在终端上，可以添加其他命令让它输出到指定文件下：
-
-```sh
-babel example.js --out-file compiled.js
-或
-babel example.js -o compiled.js
-```
-
-或将整个目录编译成一个新的目录：
-
-```sh
-babel src --out-dir lib
-或
-babel src -d lib
-```
-
-但这很麻烦，并且并不是一个很好的解决方案，请看下一节项目内运行 babel-cli。
-
-## 在项目内运行 babel-cli
-
-初始化项目
-
-```sh
-npm init
-```
-
-再安装 babel-cli
-
-```sh
-npm install --save-dev babel-cli
-```
-
-项目中的`package.json`应该包含如下内容：
-
-```json
-{
-  "name": "learn-es6",
-  "version": "1.0.0",
-  "devDependencies": {
-    "babel-cli": "^6.10.1"
-  }
-}
-```
-
-添加 npm scripts 命令。
-
-```diff
-{
-  "name": "learn-es6",
-  "version": "1.0.0",
-+   "scripts": {
-+     "build": "babel src -d lib"
-+   },
-  "devDependencies": {
-    "babel-cli": "^6.10.1"
-  }
-}
-```
-
-此时在终端里运行
-
-```sh
-npm run build
-```
-
-还不能成功编译，因为没有配置`.babelrc`文件。
-
-## 配置`.babelrc`
-
-通过配置`.babelrc`来告诉 babel 来做什么。
-
-在项目的根路径下创建`.babelrc`文件。然后输入以下内容作为开始：
-
-```json
-{
-    "presets": [],
-    "plugins": []
-}
-```
-
-为了让 babel 将 ES2015 转化为 ES5，我们要安装如下：
-
-```sh
-npm install --save-dev babel-preset-es2015
-```
-
-安装完成后在`.babelrc`中添加参数：
-
-```diff
-{
-    "presets": [
-+       "es2015"
-    ],
-    "plugins": []
-}
-```
-
-现在在项目`src/main.js`中写一些 ES2015 的代码试试吧。
-
-```js
-let a = 1
-```
-
-在终端中输入命令
-
-```sh
-npm run build
-```
-
-执行后终端中显示：
-
-```
-> learn-es6@1.0.0 build c:\gitWorkSpace\learn-es6
-> babel src -d lib
-```
-
-然后可以看到目录中出现了`lib/main.js`
-
-```js
-"use strict";
-
-var a = 1;
-```
-
-即编译成功。
-
-## 配置`.jshintrc`
-
-若编辑器中安装了 jshint 语法检查的插件。默认对于 ES2015 的代码可能会报错或者警告，看着可能会不爽。我们可以在配置文件中将它设置为允许 ES2015 的模式。
-
-在项目根目录下创建文件`.jshintrc`。内容如下：
-
-```json
-{
-    "asi": true,
-    "esversion": 2015
-}
-```
-
-上述文件我分别设置了，使用无分号模式，es 版本使用 2015。
-
-关于`.jshintrc`的更详细配置可以参见官方示例：[https://github.com/jshint/jshint/blob/master/examples/.jshintrc](https://github.com/jshint/jshint/blob/master/examples/.jshintrc)
-
-好，babel 就说到这里，下面开始进入真正的 ES2015 的学习！
+##前述 首先非常感谢讯飞罗总的热情招待，有机会能参展2017贵阳数博会，并感受了讯飞的很多黒科技，受益匪浅。贵州人民举全省之力搞大数据，决心很大，这几年也吸引了不少企业落户贵阳，不仅仅是技术人员，从小孩、大学生到官员，都在讨论大数据、区块链、Hadoop，这说明还是很有成效的。三天时间很短，看了很多也听了很多，简单记下。
+##资料收集 下面是两个资料比较集中的网站，一个是数博会官网，另外一个是贵州卫视精心梳理编制的节目。有兴趣的同学可以看看，主要用于开拓眼界、打开思路。
+  
+* 数博会官岗：(http://www.bigdata-expo.org/)
+  
+* 贵州卫视特别报道：(http://gzstv.com/2017sbh/) 当然也从会场收集了部分纸质材料，会放到办公室，供同学们参阅。
+##数博会印象： 大数据博览会，肯定大多数和大数据技术有关。印象比较深的主要有以下几点：
+###阿里ET机器人，可以实时分析交通数据自动控制红绿灯时间，可以自动给客户回访每次电话的服务质量，据说已经取得专业医师资格，可以根据病人的医疗档案和拍的片子资料给出诊断结论，和相关专业医师团队比赛，已经通过认证。
+![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20170615/1.jpg)
+###腾迅3D可视交互系统RayData，数据可视化从平面转向立体，通过3D效果图的方式展现数据。
+![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20170615/2.jpg)
+###百分点pivotal大数据套件，基于开源的Hadoop+Spark技术，在搭建大数据平台之上再增加一个大数据套件和相关插件，让用户非常方便地使用大数据平台。
+![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20170615/3.jpg)
+###京东模特范儿，用户通拍照上传，比对照片寻找类似体型的人员并给出推荐的衣服，可以看出来每套衣服穿在身上的效果。
+![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20170615/4.jpg)
+###搜狗大数据分析平台，基于用户输入的文字进行分析，可以了解用户的所在行业，所在城市等。生活中到处都是数据，如果可以采集，人每天讲的话，每天看到的图片都数据，一旦累积起来便可以做相关的应用。
+![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20170615/5.jpg)
+###浙江大华人脸识别，可以根据上传一张头像，在路口通过摄像头监控，即使你戴上墨镜、口罩路过，也能以最快的速度发现你。
+###科大国创“数据铁笼”项目获新华社发文点赞，核心就是把权力关进笼子里，把工作展示在平台上，把绩效体现在数据中。
+![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20170615/6.jpg)
+##讯飞相关产品 聆听了讯飞组织的智能客服、智慧城市相关大牛发言，也看了讯飞的呼叫中心，印象比较深的主要有：
+###会务发言记录，可以直接聆听发言，并快速转化成文字显示在字幕上。机器还可以根据你的音频记录模仿发言，已经做到人类无法区分过来的程度。当然很多方言的识别还需要人们对机器进行强化训练才行。
+![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20170615/7.jpg)
+###机器改试卷主观题，针对学生写的英文作文或中文作文实行机器评分。当然首先需要人们能够将手写的语句图片能自动转化成文本，这也缺少不了同志们对它的训练。
+![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20170615/8.jpg)
+###智能客服实现自动呼入和呼出，可以解决固定套路的业务办理，营销、欠账追讨等。据说还在训练人工智能实现执业医师资格考试，并计划几年后实现机器人通过国家一本考试的目标。相关产品，陪小孩聊天的阿尔法蛋，听音乐的叮咚音响目前销售还不错。
+![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20170615/9.jpg)
+##观点 1、相关领导说是否是智慧城市并不重要，关键是要让老百姓得到实惠，技术是为人服务，信息化也好，电子政务也好，大数据也好，智慧城市也好，关键还要看成效，目前很多地方IT建设还是呈现过高投入低回报的情况。比如某市率先实现了政务的面向老百姓、企业的唯一门户，让大家办事尽量不要跑腿，比如取公积金让你网上就能办，做得还是很好的。 2、清镇市某领导说我们这边还比较落后，所以我们更要全力以付，没有退路，上下一心，搞好大数据。其实对个人、对企业也是一样的，大家都是从零开始，唯有使用全力，才可能让自己有一丝进步。 3、牛津大学调研：未来10年，AI将在许多活动中表现超过人类，例如翻译语言（到2024年），撰写高中程度的文章（到2026年），驾驶卡车（到2027年），零售业工作（到2031年）， 写畅销书（到2049年），以及外科医生的工作（到2053年）。 4、人工智能和大数据关系很密切，主要原因是大数据主要指强大的存储计算集群、海量数据的采集，很多人智能需要使用大数据平台来训练机器，让其掌握一定的经验。比如通过跟踪一个学生，就可以做到实时为学生学习提出指导意见，而老师的精力总是有限的，但机器可以不知疲倦地去跟踪分析并优化，此时老师只需要有针对性地做某些事情即可，真正实现因材施教。 5、目前机器的最大弱点是无法实现能理解会思考，即使是几岁小孩可以理解思考的问题，机器也束手无策，但其运算、感知能力已经全面超越人类了。存储大、计算快、不犯错，知识接受能力强、可以并发工作。在很多有规律性的活动中完全秒杀人类，比如简单的咨询交流、会计、玩游戏等方面。
+![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20170615/10.jpg)
