@@ -1,8 +1,9 @@
 ---
 layout: post
 title:  "2017年贵阳数博会参展与讯飞人工智能大数据产业论坛参会记录"
-category: 记录
-tags: 大数据
+categories: 记录
+tags:  大数据
+author: shock
 ---
 
 * content
