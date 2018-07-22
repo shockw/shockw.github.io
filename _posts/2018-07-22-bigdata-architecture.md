@@ -23,7 +23,6 @@ tags:  技术方案 统计分析 流式计算 日志搜索
 ![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20180722/3.png)
 
 ## 统计分析
-
 ### 功能目标
 通过业务规则对既有数据进行统计分析，获取目标结果的过程。
 
@@ -40,7 +39,6 @@ tags:  技术方案 统计分析 流式计算 日志搜索
 ![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20180722/4.png)
 
 ## 报表展示
-
 ### 功能目标
 基于数据仓库，快速实现各类报表。
 
@@ -54,7 +52,6 @@ FineReport是帆软软件有限公司自主研发的一款企业级 web 报表�
 ![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20180722/5.png)
 
 ## 流式处理
-
 ### 功能目标
 通过流式获取时间窗口数据，实时进行业务处理。
 
@@ -70,7 +67,6 @@ FineReport是帆软软件有限公司自主研发的一款企业级 web 报表�
 ![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20180722/5.png)
 
 ## 数据检索
-
 ### 功能目标
 通过搜索各类应用系统的日志去定位系统问题，解决故障。
 
@@ -88,7 +84,6 @@ ELK 已经成为目前最流行的集中式日志解决方案，它主要是由B
 ![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20180722/6.png)
 
 ## 数据挖掘
-
 ### 功能目标
 数据挖掘一般是指从大量的数据中通过算法搜索隐藏于其中信息的过程。数据挖掘通常与计算机科学有关，并通过统计、在线分析处理、情报检索、机器学习、专家系统（依靠过去的经验法则）和模式识别等诸多方法来实现上述目标。
 
