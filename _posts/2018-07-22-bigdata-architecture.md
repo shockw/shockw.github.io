@@ -11,17 +11,14 @@ tags:  技术方案 统计分析 流式计算 日志搜索
 根据笔者与某客户的聊天，就数据处理方面的技术方案总结梳理一下，主要是目前比较主流的技术方案进行了总结。由于笔者并不是专业的数据分析专家或是业务专家，以下方案仅供参考。
 
 ## 常见数据存储方式
-
 生产数据结构化类型一般存储在Oracle或MySQL中，半结构化数据一般存储在文件或是NoSQL中。由于笔者没有从事过非结构化数据的技术方案，在此并不讨论非结构化数据的处理技术。在生产库后面一般都有一个历史库或叫分析库、归档库。主要是存储海量历史数据并能进行数据的统计分析及挖掘。
 ![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20180722/1.png)
 
 ## 数据分类
-
 下面数据的分类主要还是从客户比较熟悉的业务视角分类的，不同的场景可能区别比较大：
 ![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20180722/2.png)
 
 ## 应用分类
-
 原始数据指从数据源采集过来并没有加工的数据；标准数据指通过数据清洗转化的数据；结果数据指应用计算分析的结果：
 ![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/20180722/3.png)
 
