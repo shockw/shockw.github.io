@@ -94,8 +94,8 @@ class RunCmd(object):
            expect -c "
            set timeout 1;
            spawn kadmin ;
-           expect COM {{ send \"cloudera-scm-eip\r\" }}  ;
-           expect * {{ send \"addprinc -pw {password} {principal}@HADOOP.COM\r\" }}  ;
+           expect COM { { send \"cloudera-scm-eip\r\" } }  ;
+           expect * { { send \"addprinc -pw {password} {principal}@HADOOP.COM\r\" } }  ;
            expect *\r
            expect \r
            expect eof
