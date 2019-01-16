@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "使用jeesite快速实现业务流程开发"
-categories: 业务流程
+categories: SOA
 tags:  oa jeesite activiti 公司借款流程  
 ---
 

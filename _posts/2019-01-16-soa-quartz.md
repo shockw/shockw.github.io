@@ -1,0 +1,229 @@
+---
+layout: post
+title:  "在jeesite工程中集成quartz-web用于定时任务的管理"
+categories: SOA
+tags:  quartz 定时任务
+---
+
+* content
+{:toc}
+
+## 参考链接
+https://www.w3cschool.cn/quartz_doc/
+
+## quartz简介
+Quartz 是一个完全由 Java 编写的开源作业调度框架，为在 Java 应用程序中进行作业调度提供了简单却强大的机制。
+Quartz 可以与 J2EE 与 J2SE 应用程序相结合也可以单独使用。
+Quartz 允许程序开发人员根据时间的间隔来调度作业。
+Quartz 实现了作业和触发器的多对多的关系，还能把多个作业与不同的触发器关联。
+
+## 核心概念
+Job、JobDetail、Trigger、Scheduler
+
+## 实践环境
+
+* 使用spring-quartz，通过在xml文件中配置一个调度器。
+* 使用mysql作为quartz的中心管理节点，所有java应用都与mysql相连，实现任务可以在一个高可用环境中运行，且只运行一次。如果有一个节点宕机的情况下，则其他节点仍然可以执行任务。
+* 所有的任务均持久化到mysql中，jobDetail和Trigger均可以很方便的管理。
+
+## 为什么使用quartz-web
+quartz-web是一款开源的管理软件，通过web和接口的方式来管理调度器中的所有任务和定时器。可以很方便地集成到spring项目中。
+
+## 配置过程
+
+### web.xml增加quartz-web的servlet配置
+在pom文件中增加quartz-web的依赖
+
+~~~
+<dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+    
+    <dependency>
+        <groupId>com.github.quartzweb</groupId>
+        <artifactId>quartz-web</artifactId>
+        <version>1.2.0</version>
+    </dependency>
+~~~
+
+### web.xml增加quartz-web的servlet配置
+
+~~~
+<!-- quartzweb -->
+    <servlet>
+        <servlet-name>quartzweb</servlet-name>
+        <servlet-class>com.github.quartzweb.http.QuartzWebServlet</servlet-class>
+    </servlet>
+    <!--配置url-->
+    <servlet-mapping>
+        <servlet-name>quartzweb</servlet-name>
+        <url-pattern>/quartzweb/*</url-pattern>
+    </servlet-mapping>
+~~~
+
+### 增加一个quartz的属性文件配置
+在resources目录下面新建一个目录schedule，在目录下面新建文件quartz-cluster.properties。
+
+~~~
+#============================================================================
+# Configure Main Scheduler Properties  
+#============================================================================
+org.quartz.scheduler.instanceName = ClusteredScheduler
+org.quartz.scheduler.instanceId = AUTO
+org.quartz.scheduler.skipUpdateCheck = true
+
+#============================================================================
+# Configure ThreadPool  
+#============================================================================
+org.quartz.threadPool.class = org.quartz.simpl.SimpleThreadPool
+org.quartz.threadPool.threadCount = 5
+org.quartz.threadPool.threadPriority = 5
+
+#============================================================================
+# Configure JobStore  
+#============================================================================
+org.quartz.jobStore.class = org.quartz.impl.jdbcjobstore.JobStoreTX
+org.quartz.jobStore.driverDelegateClass=org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+org.quartz.jobStore.misfireThreshold = 60000
+org.quartz.jobStore.useProperties = false
+org.quartz.jobStore.tablePrefix = QRTZ_
+
+#Cluster setting
+org.quartz.jobStore.isClustered = true
+org.quartz.jobStore.clusterCheckinInterval = 15000
+~~~
+
+### 增加一个spring-context-quartz.xml的spring配置
+
+~~~
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="http://www.springframework.org/schema/beanshttp://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/taskhttp://www.springframework.org/schema/task/spring-task.xsd">
+    <description>spring任务调度，quartz任务调度</description>
+    <!-- 计划任务配置，用 @Service @Lazy(false)标注类，用@Scheduled(cron = "0 0 2 * * ?")标注方法 -->
+    <task:executor id="executor" pool-size="10"/> <task:scheduler id="scheduler" pool-size="10"/>
+    <task:annotation-driven scheduler="scheduler" executor="executor" proxy-target-class="true"/>
+    <bean id="clusterQuartzScheduler"
+        class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <!-- quartz配置文件路径, 指向cluster配置 -->
+        <property name="configLocation" value="classpath:schedule/quartz-cluster.properties" />
+        <!-- 启动时延期5秒开始任务 -->
+        <property name="startupDelay" value="5" />
+        <!-- 保存Job数据到数据库所需的数据源 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- Job接受applicationContext的成员变量名 -->
+        <property name="applicationContextSchedulerContextKey" value="applicationContext" />
+        <!-- 修改job时，更新到数据库 -->
+        <property name="overwriteExistingJobs" value="true" />
+    </bean>
+    <!--设置系统管理器,必须使用getInstance()初始化实例,系统整体设计管理器全部为单例-->
+    <bean class="com.github.quartzweb.manager.quartz.QuartzManager" factory-method="getInstance">
+        <!--设置scheduler集合-->
+        <property name="schedulers">
+            <list>
+                <ref bean="clusterQuartzScheduler" />
+            </list>
+        </property>
+        <!--设置是否查找scheduler仓库,false-->
+        <property name="lookupSchedulerRepository" value="false"/>
+        <!--是否使用默认scheduler-->
+        <property name="useDefaultScheduler" value="false"/>
+    </bean>
+    
+    <!--设置bean管理器,通过spring的applicationContext获取-->
+    <bean id="springQuartzBeanManager" class="com.github.quartzweb.manager.bean.SpringQuartzBeanManager">
+        <property name="priority" value="1" />
+    </bean>
+    
+    <!--声明bean管理器门面,必须使用getInstance()初始化实例-->
+    <bean id="quartzBeanManagerFacade" class="com.github.quartzweb.manager.bean.QuartzBeanManagerFacade"
+          factory-method="getInstance">
+        <!--设置管理器,根据优先级排序-->
+        <property name="quartzBeanManagers">
+            <list>
+                <ref bean="springQuartzBeanManager"/>
+            </list>
+        </property>
+        <!--是否启用默认bean管理器-->
+        <property name="useDefaultQuartzBeanManager" value="false"/>
+    </bean>
+</beans>
+~~~
+
+### 效果
+启动web工程后，输入http://ip:port/应用名/quartzweb，即可打开quartz管理界面
+
+### quartz任务示例
+下面是一个quartzJob的示例
+
+~~~
+package com.reache.jeemanage.test.job;
+
+import java.util.Date;
+
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.quartz.QuartzJobBean;
+
+public class JobDemo extends QuartzJobBean {
+
+private static Logger logger = LoggerFactory.getLogger(JobDemo.class);
+
+@Override
+protected void executeInternal(JobExecutionContext ctx) throws JobExecutionException {
+logger.info("线程id：" + Thread.currentThread().getId() + " 时间:" + new Date());
+}
+}
+~~~
+
+## 关于不通过web界面进行任务管理的方式
+此种方式下，也可以通过xml配置的方式完成任务配置，需要注意的是只要任务配置过后并启动一次，则后面即使删除配置，任务仍会存在，原因是任务已经持久化到数据库。下面是一个配置示例
+
+~~~
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task" xsi:schemaLocation="http://www.springframework.org/schema/beanshttp://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/taskhttp://www.springframework.org/schema/task/spring-task.xsd">
+   <description>spring任务调度，quartz任务调度</description>
+
+    <task:annotation-driven executor="quartzTaskExecutor" />
+    <task:executor id="quartzTaskExecutor" keep-alive="900" pool-size="10" queue-capacity="20" />
+    
+    <bean id="clusterQuartzScheduler"
+        class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <!-- quartz配置文件路径, 指向cluster配置 -->
+        <property name="configLocation" value="classpath:schedule/quartz-cluster.properties" />
+        <!-- 启动时延期5秒开始任务 -->
+        <property name="startupDelay" value="5" />
+        <!-- 保存Job数据到数据库所需的数据源 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- Job接受applicationContext的成员变量名 -->
+        <property name="applicationContextSchedulerContextKey" value="applicationContext" />
+        <!-- 修改job时，更新到数据库 -->
+        <property name="overwriteExistingJobs" value="true" />
+         <!-- Triggers集成 -->
+        <property name="triggers">
+            <list>
+                <ref bean="heartBeatTrigger" />
+            </list>
+        </property>
+    </bean>
+    
+    <!-- 定时任务 -->
+    <bean id="heartBeatTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="heartBeatJobDetail" />
+        <!-- 每5秒执行一次 -->
+        <property name="cronExpression" value="*/5 * * * * ? " />
+    </bean>
+    <bean id="heartBeatJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="durability" value="true" />
+        <property name="jobClass" value="com.ustcinfo.ishare.bdp.modules.transfer.resource.job.HeartBeatJob" />
+    </bean>
+</beans>
+~~~
