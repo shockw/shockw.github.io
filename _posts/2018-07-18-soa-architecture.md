@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "浅谈从单体应用到业务中台架构的演变"
-categories: SOA
+categories: 应用开发
 tags:  SOA 微服务  
 ---
 
