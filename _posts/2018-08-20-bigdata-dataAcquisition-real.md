@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "快速通过ELK实现日志统一收集展示"
-categories: 大数据
+categories: 大数据杂谈
 tags:  大数据 采集  实时  
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "关于无向图中的路径搜索试验"
-categories: 大数据
+categories: 大数据杂谈
 tags:  图计算
 ---
 

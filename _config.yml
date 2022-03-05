@@ -7,7 +7,7 @@
 
 # Site settings
 title: 山客的个人博客
-brief-intro: 软件工程师
+brief-intro: Software Engineer
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://shockw.github.io" # the base hostname & protocol for your site
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "通过kettle实现文件到数据库转换的ETL流程实践"
-categories: 大数据
+categories: 大数据杂谈
 tags:  大数据 数据采集  转换   
 ---
 
