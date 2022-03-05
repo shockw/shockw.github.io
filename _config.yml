@@ -7,7 +7,7 @@
 
 # Site settings
 title: 山客的个人博客
-brief-intro: Java Programmer
+brief-intro: 软件工程师
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://shockw.github.io" # the base hostname & protocol for your site
 
@@ -17,7 +17,7 @@ permalink: /:year/:month/:day/:title/
 twitter_username: #gaohaoyang126
 facebook_username: #gaohaoyang.water
 github_username:  shockw
-email: wang.zhen@foxmail.com
+email: wang.shock@qq.com
 weibo_username: wangshock
 zhihu_username: shockw
 linkedIn_username: wang.shock@gmail.com
