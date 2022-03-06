@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "使用pyspider实现抓取合肥房产局数据Demo"
-categories: 大数据杂谈
-tags:  python 爬虫 
+categories: 数据平台
+tags:  数据平台 python 爬虫 
 ---
 
 * content

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "数据处理技术路径概览"
-categories: 大数据杂谈
+categories: 数据平台
 tags:  技术方案 统计分析 流式计算 日志搜索  
 ---
 
