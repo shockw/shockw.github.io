@@ -18,7 +18,7 @@ tags:  云计算
 + paas提供组件服务，包括数据库、缓存、中间件等。
 + saas提供应用服务，面向最终用户，开箱即用，支撑业务场景。
 
-![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/云计算知识要点.assets/image-20230715162616992.png)
+![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/2023071516/image-20230715162616992.png)
 
 # 虚拟化技术
 
@@ -34,4 +34,4 @@ tags:  云计算
 
 云原生是一种**构建和运行应用程序的方法**，是一套技术体系和方法论。云原生（CloudNative）是一个组合词，Cloud+Native。Cloud表示应用程序位于云中，而不是传统的数据中心；Native表示应用程序从设计之初即考虑到云的环境，原生为云而设计，**在云上以最佳姿势运行**，充分利用和发挥云平台的弹性+分布式优势。
 
-![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/云计算知识要点.assets/image-20230715162520045.png)
+![](https://raw.githubusercontent.com/shockw/shockw.github.io/master/img/2023071516/image-20230715162520045.png)
