@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "通过Python实现Kerberos主体管理"
-categories: 大数据杂谈
+categories: IT杂谈
 tags:  大数据 安全  Kerberos subprocess flask  
 ---
 

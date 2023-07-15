@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Hadoop平台中的透明数据加密"
-categories: 大数据杂谈
+categories: IT杂谈
 tags:  大数据 安全  TDE 透明数据加密  
 ---
 
